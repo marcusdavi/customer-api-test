@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = GenderEnumValidator.class)
-public @interface ValidGenderEnum {
+public @interface Gender {
 
     String message() default "the gender value can be: M or F.";
 

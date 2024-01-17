@@ -5,7 +5,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import com.example.api.domain.enums.GenderEnum;
 
-public class GenderEnumValidator implements ConstraintValidator<ValidGenderEnum, String> {
+public class GenderEnumValidator implements ConstraintValidator<Gender, String> {
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {

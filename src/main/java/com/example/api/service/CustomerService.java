@@ -54,7 +54,7 @@ public class CustomerService {
 
 			return repository.save(updateCustomer);
 		} else {
-			throw new ResourceNotFoundException(MessageErrorEnum.ADDRESS_NOT_FOUND.getMessage());
+			throw new ResourceNotFoundException(MessageErrorEnum.CUSTOMER_NOT_FOUND.getMessage());
 		}
 
 	}
@@ -63,7 +63,7 @@ public class CustomerService {
 		if (repository.existsById(id)) {
 			repository.deleteById(id);
 		} else {
-			throw new ResourceNotFoundException(MessageErrorEnum.ADDRESS_NOT_FOUND.getMessage());
+			throw new ResourceNotFoundException(MessageErrorEnum.CUSTOMER_NOT_FOUND.getMessage());
 		}
 
 	}
