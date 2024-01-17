@@ -1,18 +1,23 @@
 package com.example.api.domain;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import com.example.api.domain.enums.GenderEnum;
-
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "CUSTOMER")
-@Getter
-@Setter
+@Table(name = "ADDRESS")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class Address {
 
 	@Id
@@ -20,15 +25,29 @@ public class Address {
 	private Long id;
 
 	@Column(nullable = false)
-	private String name;
+	private String cep;
+
+	private String logradouro;
+
+	private String complemento;
+
+	private String bairro;
 
 	@Column(nullable = false)
-	@NotEmpty
-	@Email
-	private String email;
+	private String localidade;
 
 	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private GenderEnum gender;
+	private String uf;
+
+	@Column(nullable = false)
+	private String ibge;
+
+	private String gia;
+
+	@Column(nullable = false)
+	private String ddd;
+
+	@Column(nullable = false)
+	private String siafi;
 
 }

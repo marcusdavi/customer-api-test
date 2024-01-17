@@ -1,7 +1,9 @@
 package com.example.api.service;
 
 import java.util.Optional;
+import java.util.Set;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -10,9 +12,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.example.api.domain.Address;
 import com.example.api.domain.Customer;
 import com.example.api.domain.dto.CustomerRequestDto;
+import com.example.api.domain.enums.MessageErrorEnum;
 import com.example.api.exceptions.ResourceNotFoundException;
 import com.example.api.repository.CustomerRepository;
 
@@ -22,7 +27,7 @@ public class CustomerService {
 	private CustomerRepository repository;
 
 	@Autowired
-	public CustomerService(CustomerRepository repository) {
+	public CustomerService(CustomerRepository repository, CepService cepService) {
 		this.repository = repository;
 	}
 
@@ -49,7 +54,7 @@ public class CustomerService {
 
 			return repository.save(updateCustomer);
 		} else {
-			throw new ResourceNotFoundException("The customer not exists.");
+			throw new ResourceNotFoundException(MessageErrorEnum.ADDRESS_NOT_FOUND.getMessage());
 		}
 
 	}
@@ -58,7 +63,7 @@ public class CustomerService {
 		if (repository.existsById(id)) {
 			repository.deleteById(id);
 		} else {
-			throw new ResourceNotFoundException("The customer not exists.");
+			throw new ResourceNotFoundException(MessageErrorEnum.ADDRESS_NOT_FOUND.getMessage());
 		}
 
 	}
@@ -73,8 +78,8 @@ public class CustomerService {
 			}
 
 			if (gender != null) {
-				spec = spec.and((root1, query1, criteriaBuilder1) -> criteriaBuilder1.equal(root1.get("gender"),
-						gender));
+				spec = spec
+						.and((root1, query1, criteriaBuilder1) -> criteriaBuilder1.equal(root1.get("gender"), gender));
 			}
 
 			if (email != null && !email.isEmpty()) {
@@ -86,6 +91,25 @@ public class CustomerService {
 		};
 
 		return repository.findAll(specification, pageable);
+	}
+
+	@Transactional
+	public Customer addCustomerAddress(Customer customer, Set<Address> addresses) {
+		customer.setAddresses(addresses);
+		return repository.save(customer);
+	}
+
+	public Page<Customer> searchAddress(String uf, String localidade, Pageable pageable) {
+		if (StringUtils.hasText(uf) && StringUtils.hasText(localidade)) {
+			return repository.findByAddresses_UfAndAddresses_Localidade(uf, localidade, pageable);
+		} else if (StringUtils.hasText(uf) && !StringUtils.hasText(localidade)) {
+			return repository.findByAddresses_Uf(uf, pageable);
+		} else if (!StringUtils.hasText(uf) && StringUtils.hasText(localidade)) {
+			return repository.findByAddresses_Localidade(localidade, pageable);
+		} else {
+			return repository.findAll(pageable);
+		}
+
 	}
 
 }

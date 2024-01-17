@@ -13,4 +13,10 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
 	Page<Customer> findAll(Specification<Customer> specification, Pageable pageable);
 
+	Page<Customer> findByAddresses_UfAndAddresses_Localidade(String uf, String localidade, Pageable pageable);
+
+	Page<Customer> findByAddresses_Uf(String uf, Pageable pageable);
+
+	Page<Customer> findByAddresses_Localidade(String localidade, Pageable pageable);
+
 }

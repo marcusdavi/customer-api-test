@@ -23,7 +23,6 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.api.domain.Customer;
 import com.example.api.domain.dto.CustomerRequestDto;
 import com.example.api.service.CustomerService;
-import com.sun.istack.NotNull;
 
 @RestController
 @RequestMapping("/customers")
@@ -54,6 +53,13 @@ public class CustomerController {
 			@PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
 		return ResponseEntity.ok(service.search(name, email, gender, pageable));
 	}
+	
+	@GetMapping("/search-address")
+	public ResponseEntity<Page<Customer>> searchAddress(@RequestParam(required = false) String uf,
+			@Valid @RequestParam(required = false) String localidade, 
+			@PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
+		return ResponseEntity.ok(service.searchAddress(uf, localidade, pageable));
+	}
 
 	@PostMapping
 	public ResponseEntity<Customer> create(@RequestBody @Valid CustomerRequestDto customerDTO) {
@@ -66,7 +72,7 @@ public class CustomerController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@Valid @PathVariable @NotNull Long id) {
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}

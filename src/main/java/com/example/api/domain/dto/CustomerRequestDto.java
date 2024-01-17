@@ -6,9 +6,13 @@ import javax.validation.constraints.Size;
 
 import com.example.api.validators.ValidGenderEnum;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerRequestDto {
 
 	@NotBlank()
@@ -22,28 +26,5 @@ public class CustomerRequestDto {
 	@Email
 	private String email;
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 }
