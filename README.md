@@ -6,10 +6,8 @@
 1. Maven 3
 
 ### Swagger
-Foi criada uma página no swagger para melhorar a documentação, bem como facilitar os testes sem necessidade de uma ferramenta a parte.
+Foi criada uma página no swagger para melhorar a documentação, bem como facilitar os testes sem necessidade de uma ferramenta a parte. Após rodar a aplicação acesse: 
 http://localhost:8080/swagger-ui.html
-
-### Comandos Prova Prática
 
 ### Endpoints
 
