@@ -26,30 +26,30 @@ http://localhost:8080/swagger-ui.html
         * GET http://localhost:8080/customers?pageNumber=0&pageSize=10&sort=name,desc
 
 
-2. Consultar Clientes pelo id(GET)
+2. Consultar Clientes pelo id
     * GET http://localhost:8080/customers/{id}
 
         * onde {id} é o identificador do cliente
 
-3. Consultar Clientes pelos campos(GET)
+3. Consultar Clientes pelos campos
 
     * Foi criada apenas um único endpoint para a busca por nome, email e/ou genero. A consulta foi paginada. Para nome e email o filtro verifica se parte do nome ou email está presente no banco de dados. Já o gênero tem que ser exatamente igual.
 
     * Para buscar por nome: 
-        * GET http://localhost:8080/customers/search?name=value
+        * GET http://localhost:8080/customers/search?name={value}
 
     * Para buscar por email:
-        * GET http://localhost:8080/customers/search?gender=value
+        * GET http://localhost:8080/customers/search?email={value}
     
     * Para buscar por gênero:
-        * GET http://localhost:8080/customers/search?gender=value
+        * GET http://localhost:8080/customers/search?gender={value}
 
     * Para buscar por 2 ou mais campos, basta separá-los por &, exemplo:
 
         * Nome, email e gênero: 
-            * GET http://localhost:8080/customers/search?name=value1&gender=value2&email=value3
+            * GET http://localhost:8080/customers/search?name={value1}&gender={value2}&email={value3}
         * Nome e gênero:
-            * GET http://localhost:8080/customers/search?name=value1&gender=value2
+            * GET http://localhost:8080/customers/search?name={value1}&gender={value2}
 
 4. Criar um novo Cliente
     * POST http://localhost:8080/customers/
@@ -62,16 +62,6 @@ http://localhost:8080/swagger-ui.html
             "name": "Joao"
             }
             ```
-        * Exemplo: Response Body
-            * Status: 201 (Created)
-            ```
-                {
-                "id" 6,
-                "email": "joao@gmail.com",
-                "gender": "M",
-                "name": "Joao"
-                }
-            ```
 
 5. Editar novo Cliente
     * PUT http://localhost:8080/customers/6
@@ -79,16 +69,6 @@ http://localhost:8080/swagger-ui.html
         * Request Body
             ```
             {
-              "email": "joao@gmail.com",
-              "gender": "M",
-              "name": "Joao Santos"
-            }
-            ```
-        * Exemplo: Response Body
-            * Status: 200 (Ok)
-            ```
-            {
-              "id" 6,
               "email": "joao@gmail.com",
               "gender": "M",
               "name": "Joao Santos"

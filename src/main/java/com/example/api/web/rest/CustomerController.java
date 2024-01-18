@@ -22,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.api.domain.Customer;
 import com.example.api.domain.dto.CustomerRequestDto;
+import com.example.api.exceptions.ResourceNotFoundException;
 import com.example.api.service.CustomerService;
 
 @RestController
@@ -44,7 +45,7 @@ public class CustomerController {
 	@GetMapping("/{id}")
 	public Customer findById(@PathVariable Long id) {
 		return service.findById(id)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
+				.orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
 	}
 
 	@GetMapping("/search")
