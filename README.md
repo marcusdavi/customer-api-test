@@ -134,7 +134,7 @@ http://localhost:8080/swagger-ui.html
 * Tratamento das Exceções
     * Foi criado um ControlerAdvice para tratar as exceções. Foram criados duas exceções personalizadas e um tratamento específico para a exceção na validação dos campos dos requests.
 * Testes Unitários
-    * Foram criados testes unitários para os Services apenas
+    * Foram criados testes unitários para alguns cenários do CustomerService
 * Sobre as consultas
     * Não foi criado endpoint para cada campo a ser consultado. Existe um endpoint que pode ser consultado nome, email e/ou gênero.
         * Usei criteria nesta primeira consulta. Facilita quando o número de campos pode crescer e ficar muito grande

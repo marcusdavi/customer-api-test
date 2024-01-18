@@ -14,7 +14,6 @@ import com.example.api.domain.dto.AddressRequestDTO;
 import com.example.api.domain.enums.MessageErrorEnum;
 import com.example.api.domain.service.cep.dto.AddressCepResponseDTO;
 import com.example.api.exceptions.ResourceNotFoundException;
-import com.example.api.repository.AddressRepository;
 
 @Service
 public class AddressService {
@@ -23,8 +22,7 @@ public class AddressService {
 	private CepService cepService;
 
 	@Autowired
-	public AddressService(AddressRepository repository, CustomerService customerService, CepService cepService) {
-
+	public AddressService(CustomerService customerService, CepService cepService) {
 		this.customerService = customerService;
 		this.cepService = cepService;
 	}
