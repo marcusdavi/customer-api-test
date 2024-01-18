@@ -15,6 +15,7 @@ Foi criada uma página no swagger para melhorar a documentação, bem como facil
 http://localhost:8080/swagger-ui.html
 
 ### Endpoints
+* Apesar de ter disponibilizado o swagger, também detalho aqui um pouco sobre os endpoints disponibilizados
 
 1. Listar Todos os clientes (Consulta paginada)
     * Foi criada uma consulta podendo ser parametrizada a paginação e a ordenação. Se nada for informado a página é a primeira (valor 0) e possui tamanho 10. A ordenação default é pelo campo name em direção ascendente.
@@ -78,20 +79,21 @@ http://localhost:8080/swagger-ui.html
         * Request Body
             ```
             {
-            "email": "joao@gmail.com",
-            "gender": "M",
-            "name": "Joao Santos"
+              "email": "joao@gmail.com",
+              "gender": "M",
+              "name": "Joao Santos"
             }
             ```
         * Exemplo: Response Body
             * Status: 200 (Ok)
             ```
-                {
-                "id" 6,
-                "email": "joao@gmail.com",
-                "gender": "M",
-                "name": "Joao Santos"
-                }
+            {
+              "id" 6,
+              "email": "joao@gmail.com",
+              "gender": "M",
+              "name": "Joao Santos"
+            }
+            ```
 
 6. Deletar Cliente
     * DELETE http://localhost:8080/customers/6
@@ -110,12 +112,31 @@ http://localhost:8080/swagger-ui.html
 8. Adicionar Endereços para o cliente
     * O endpoint foi criado para que seja passado uma lista de números de cep como entrada. A partir daí se todos os ceps forem válidos o cliente terá todos os endereços acrescentados ao seu cadastro.
 
+    * POST http://localhost:8080/addresses/{customerId}, onde customerID é o id do customer que terá os endereços adicionados.
+
     * Request Body
         ```
         { 
             "ceps": [45345000, 41830260]
         }
         ```
-      
+                      
 ### Observações
-    * Não foram implementadas autenticação e autorização para esta API
+* Response Body dos serviços
+    * Como foi criado um swagger, então não coloquei neste documento
+* Validações gerais
+    * Gênero M ou F - Validador próprio criado
+    * Email - email bem formado
+    * Nome - Tamanho mínimo 2
+    * Verificação se o Cliente existe ou não
+    * Verificação se o Endereço existe ou não
+    * Se um dos ceps informados não possuir endereço nenhum endereço da requisição é cadastrado para o Cliente.
+* Testes Unitários
+    * Foram criados testes unitários para os Services apenas
+* Sobre as consultas
+    * Não foi criado endpoint para cada campo a ser consultado. Existe um endpoint que pode ser consultado nome, email e/ou gênero.
+        * Usei criteria nesta primeira consulta. Facilita quando o número de campos pode crescer e ficar muito grande
+    * Um segundo endpoint foi criado para consultar por UF e Localidade
+        * Como eram só dois campos fiz uma verificação no service para indicar qual consulta será feita ao banco
+* Não foram implementadas autenticação e autorização para esta API
+
