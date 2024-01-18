@@ -131,6 +131,8 @@ http://localhost:8080/swagger-ui.html
     * Verificação se o Cliente existe ou não
     * Verificação se o Endereço existe ou não
     * Se um dos ceps informados não possuir endereço nenhum endereço da requisição é cadastrado para o Cliente.
+* Tratamento das Exceções
+    * Foi criado um ControlerAdvice para tratar as exceções. Foram criados duas exceções personalizadas e um tratamento específico para a exceção na validação dos campos dos requests.
 * Testes Unitários
     * Foram criados testes unitários para os Services apenas
 * Sobre as consultas
