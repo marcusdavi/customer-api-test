@@ -1,5 +1,7 @@
 package com.example.api.web.rest;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +26,7 @@ public class AddressController {
 	}
 	
 	@PostMapping("/{customerId}")
-	public ResponseEntity<Customer> addCustomerAddress(@PathVariable Long customerId, @RequestBody AddressRequestDTO addressDTO){
+	public ResponseEntity<Customer> addCustomerAddress(@PathVariable Long customerId, @Valid @RequestBody AddressRequestDTO addressDTO){
 		
 		return ResponseEntity.ok(service.addCustomerAddress(customerId, addressDTO));
 	}

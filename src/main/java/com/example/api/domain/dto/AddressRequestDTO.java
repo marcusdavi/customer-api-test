@@ -3,6 +3,7 @@ package com.example.api.domain.dto;
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class AddressRequestDTO {
 
 	@NotEmpty
-	private List<Integer> ceps;
+	private List<@NotNull Integer> ceps;
 
 	
 }
